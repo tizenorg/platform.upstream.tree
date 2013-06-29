@@ -8,6 +8,7 @@ Summary:        File listing as a tree
 Url:            http://mama.indstate.edu/users/ice/tree/
 Group:          System/Tools
 Source0:        %{name}-%{version}.tar.bz2
+Source1001: 	tree.manifest
 
 %description
 Tree is a recursive directory listing command that produces a depth
@@ -16,6 +17,7 @@ LS_COLORS environment variable is set and output is to tty.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 make OPTFLAGS="%{optflags}" CC="gcc"
@@ -27,6 +29,7 @@ install -m 644 doc/%{name}.1 %{buildroot}%{_mandir}/man1
 install -m 755 %{name} %{buildroot}%{_bindir}
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %license LICENSE
 %{_bindir}/%{name}
