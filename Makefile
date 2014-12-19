@@ -31,8 +31,8 @@ OBJS=tree.o unix.o html.o xml.o hash.o color.o
 
 # Linux defaults:
 #CFLAGS=-ggdb -Wall -DLINUX -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
-CFLAGS=-O4 -Wall  -DLINUX -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
-LDFLAGS=-s
+CFLAGS+=-O4 -Wall  -DLINUX -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
+LDFLAGS+=-s
 
 # Uncomment for FreeBSD:
 #CFLAGS=-O2 -Wall -fomit-frame-pointer
@@ -83,7 +83,7 @@ LDFLAGS=-s
 all:	tree
 
 tree:	$(OBJS)
-	$(CC) $(LDFLAGS) -o $(TREE_DEST) $(OBJS)
+	$(CC) -o $(TREE_DEST) $(OBJS) $(LDFLAGS)
 
 $(OBJS): %.o:	%.c tree.h
 	$(CC) $(CFLAGS) -c -o $@ $<
